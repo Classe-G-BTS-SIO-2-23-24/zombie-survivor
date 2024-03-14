@@ -9,7 +9,7 @@ void setup() {
   size(1366,768,P2D);
   
   joueurImg = loadImage("spriteJoueur.png");
-  myJoueur = new Joueur(20,height/2-joueurImg.height/2,50,50,joueurImg);
+  myJoueur = new Joueur(20,height/2-joueurImg.height/2,50,50,100,joueurImg);
 }
 
 void draw(){
