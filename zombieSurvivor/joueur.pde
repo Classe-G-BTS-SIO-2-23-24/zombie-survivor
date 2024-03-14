@@ -13,7 +13,7 @@ class Joueur {
     this.xPos = xJoueurPos;
     this.yPos = yJoueurPos;
     this.xSpeed = xJoueurSpeed;
-    this.ySpeed = xJoueurSpeed;
+    this.ySpeed = yJoueurSpeed;
     this.img = joueurImage;
   }
 }
