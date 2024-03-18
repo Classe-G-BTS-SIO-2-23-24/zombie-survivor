@@ -22,12 +22,17 @@ void setup() {
 
 void draw() {
   image(mapImg, 0, 0);
-
-  image(myJoueur.img, myJoueur.xPos, myJoueur.yPos);
+  float angle = atan2(mouseY - myJoueur.yPos, mouseX - myJoueur.xPos);
+  pushMatrix();
+  translate(myJoueur.xPos, myJoueur.yPos);
+  rotate(angle);
+  // imageMode(CENTER); bug image ne pas utiliser
+  image(myJoueur.img, -33.5, -25);
+  popMatrix();
+  
    myZombie.xPos-=myZombie.xSpeed;
    image(zombieImg, myZombie.xPos, myZombie.yPos);
 }
-
 
 void keyPressed() {
   if (key == CODED) {
