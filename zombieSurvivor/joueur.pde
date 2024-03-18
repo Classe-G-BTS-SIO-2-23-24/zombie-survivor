@@ -5,15 +5,17 @@ class Joueur {
   float ySpeed;
   int vie;
   PImage img;
+  float angle;
   //Atouts[] atouts;
   //Arme arme;
   
-  Joueur(float xJoueurPos, float yJoueurPos, float xJoueurSpeed, float yJoueurSpeed, int vieJoueur, PImage joueurImage) {
+  Joueur(float xJoueurPos, float yJoueurPos, float xJoueurSpeed, float yJoueurSpeed, int vieJoueur, PImage joueurImage, float angle) {
     this.xPos = xJoueurPos;
     this.yPos = yJoueurPos;
     this.xSpeed = xJoueurSpeed;
     this.ySpeed = yJoueurSpeed;
     this.vie = vieJoueur;
     this.img = joueurImage;
+    this.angle = 0;
   }
 }
