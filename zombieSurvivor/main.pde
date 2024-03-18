@@ -12,7 +12,7 @@ void setup() {
   size(1366, 768, P2D);
 
   joueurImg = loadImage("spriteJoueur.png");
-  myJoueur = new Joueur(20, height/2-joueurImg.height/2, 50, 50, 100, joueurImg);
+  myJoueur = new Joueur(20, height/2-joueurImg.height/2, 50, 50, 100, joueurImg, 0);
   
     zombieImg= loadImage("zombie.png");
     myZombie = new Zombie(width - zombieImg.width, (float)(height/2 - zombieImg.height/2), 3, 0, zombieImg);
@@ -22,10 +22,10 @@ void setup() {
 
 void draw() {
   image(mapImg, 0, 0);
-  float angle = atan2(mouseY - myJoueur.yPos, mouseX - myJoueur.xPos);
+  myJoueur.angle = atan2(mouseY - myJoueur.yPos, mouseX - myJoueur.xPos);
   pushMatrix();
   translate(myJoueur.xPos, myJoueur.yPos);
-  rotate(angle);
+  rotate(myJoueur.angle);
   // imageMode(CENTER); bug image ne pas utiliser
   image(myJoueur.img, -33.5, -25);
   popMatrix();
