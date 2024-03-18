@@ -1,15 +1,19 @@
 class Zombie{
     float xPos; 
-    float  yPos; 
+    float yPos; 
     float xSpeed;
-    float ySpeed;
+    float Angle ; 
+    int vie ; 
     PImage img;
+    
 
-    Zombie(float xZombiePos, float  yZombiePos , float xZombieSpeed,  float yZombieSpeed , PImage ZombieImage) {
+    Zombie(float xZombiePos, float  yZombiePos , float Zombieangle, int Zombievie, 
+      float ZombieSpeed,  PImage ZombieImage) {
         this.xPos = xZombiePos;
         this.yPos = yZombiePos;
-        this.xSpeed= xZombieSpeed;
-        this.ySpeed = yZombieSpeed;
+        this.xSpeed= ZombieSpeed;
+        this.Angle=Zombieangle; 
+        this.vie=Zombievie;
         this.img = ZombieImage;
 
     } 
