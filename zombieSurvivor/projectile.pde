@@ -7,8 +7,8 @@ class Projectile {
   PImage img;
   
   Projectile(float xProjectilePos, float yProjectilePos, float xSpeed, float ySpeed, float projectileAngle, PImage projectileImage){
-    this.xSpeed = xSpeed;
-    this.ySpeed = ySpeed;
+    this.xSpeed = cos(angle);
+    this.ySpeed = sin(angle);
     this.xPos = xProjectilePos;
     this.yPos = yProjectilePos;
     this.angle = projectileAngle;
