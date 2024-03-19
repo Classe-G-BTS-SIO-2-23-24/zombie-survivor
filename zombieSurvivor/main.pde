@@ -27,7 +27,7 @@ void draw() {
   translate(myJoueur.xPos, myJoueur.yPos);
   rotate(myJoueur.angle);
   // imageMode(CENTER); bug image ne pas utiliser
-  image(myJoueur.img, -33.5, -25);
+  image(myJoueur.img, -myJoueur.img.width/2, -myJoueur.img.height/2);
   popMatrix();
   
    image(zombieImg, myZombie.xPos, myZombie.yPos);
