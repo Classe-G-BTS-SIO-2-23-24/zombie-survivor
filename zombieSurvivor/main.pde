@@ -30,8 +30,14 @@ void draw() {
   image(myJoueur.img, -33.5, -25);
   popMatrix();
   
-   myZombie.xPos-=myZombie.xSpeed;
    image(zombieImg, myZombie.xPos, myZombie.yPos);
+   
+   if (myJoueur.xPos < myZombie.xPos + zombieImg.width/2 &&
+    myJoueur.xPos + joueurImg.width/2 > myZombie.xPos &&
+    myJoueur.yPos < myZombie.yPos + zombieImg.height/2 &&
+    myJoueur.yPos + joueurImg.height/2 > myZombie.yPos) {
+    println("Collision");
+    }
 }
 
 void keyPressed() {
