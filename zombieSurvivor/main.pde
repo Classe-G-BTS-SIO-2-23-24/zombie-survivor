@@ -4,7 +4,7 @@ PImage joueurImg;
 Joueur myJoueur;
 
 PImage zombieImg;
-Zombie myZombie; 
+Zombie[] myZombies; // Définir un tableau de zombies
 
 void setup() {
   hint(ENABLE_KEY_REPEAT);
@@ -15,9 +15,10 @@ void setup() {
   myJoueur = new Joueur(20, height/2-joueurImg.height/2, 50, 50, 100, joueurImg, 0);
   
   zombieImg= loadImage("zombie.png");
-  myZombie = new Zombie(width - zombieImg.width, (float)(height/2 - zombieImg.height/2), 3, 0, 100, zombieImg);
-
-
+  myZombies = new Zombie[10]; // Initialiser le tableau avec le nombre de zombies souhaité
+  for(int i = 0; i < myZombies.length; i++) {
+    myZombies[i] = new Zombie(width - zombieImg.width, (float)(height/2 - zombieImg.height/2), 3, 0, 100, zombieImg);
+  }
 }
 
 void draw() {
@@ -30,10 +31,13 @@ void draw() {
   image(myJoueur.img, -33.5, -25);
   popMatrix();
   
-   myZombie.xPos-=myZombie.xSpeed;
-   image(zombieImg, myZombie.xPos, myZombie.yPos);
+ for(int i=0; i<myZombies.length;i++){
+    myZombies[i].xPos += cos(radians(myZombies[i].Angle))*myZombies[i].xSpeed;
+    myZombies[i].yPos += sin(radians(myZombies[i].Angle))*myZombies[i].xSpeed;
+    image(zombieImg, myZombies[i].xPos, myZombies[i].yPos); // Dessiner chaque zombie
+  }   
 }
-
+  
 void keyPressed() {
   if (key == CODED) {
     if (keyCode == RIGHT) {
