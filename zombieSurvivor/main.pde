@@ -14,8 +14,8 @@ void setup() {
   joueurImg = loadImage("spriteJoueur.png");
   myJoueur = new Joueur(20, height/2-joueurImg.height/2, 50, 50, 100, joueurImg, 0);
   
-    zombieImg= loadImage("zombie.png");
-    myZombie = new Zombie(width - zombieImg.width, (float)(height/2 - zombieImg.height/2), 3, 0, zombieImg);
+  zombieImg= loadImage("zombie.png");
+  myZombie = new Zombie(width - zombieImg.width, (float)(height/2 - zombieImg.height/2), 3, 0, 100, zombieImg);
 
 
 }
