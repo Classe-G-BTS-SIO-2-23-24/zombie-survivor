@@ -5,6 +5,7 @@ class Projectile {
   float ySpeed;
   float angle;
   PImage img;
+  boolean toucheZombie = false;
   
   Projectile(float xProjectilePos, float yProjectilePos, float xSpeedCos, float ySpeedSin, float projectileAngle, PImage projectileImage){
     this.xSpeed = xSpeedCos;
@@ -26,5 +27,15 @@ class Projectile {
   rotate(angle);
   image(img, 11, 11);
   popMatrix();
+  }
+  
+  void verifCollisionZombie(Zombie zombie) {
+    if (!toucheZombie && xPos < zombie.xPos + zombie.img.width/2 &&
+        xPos + img.width > zombie.xPos &&
+        yPos < zombie.yPos + zombie.img.height/2 &&
+        yPos + img.height > zombie.yPos) {
+      toucheZombie = true;
+    println("Collision projectile-zombie");
+    }
   }
 }

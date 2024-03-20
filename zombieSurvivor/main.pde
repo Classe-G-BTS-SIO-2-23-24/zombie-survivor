@@ -20,7 +20,7 @@ void setup() {
   myJoueur = new Joueur(20, height/2-joueurImg.height/2, 10, 10, 100, joueurImg, 0, projectiles, projectileImg);
   
   zombieImg= loadImage("zombie.png");
-  myZombie = new Zombie(width - zombieImg.width, (float)(height/2 - zombieImg.height/2), 3, 0, 100, zombieImg);
+  myZombie = new Zombie(width/2, (float)(height/2 - zombieImg.height/2), 3, 0, 100, zombieImg);
 
 
 }
@@ -56,6 +56,18 @@ void draw() {
     println("Collision projectile-zombie");
     }
   }
+  
+  for (int i = projectiles.size() - 1; i >= 0; i--) {
+  Projectile p = projectiles.get(i);
+  p.update();
+  p.affichage();
+  
+  p.verifCollisionZombie(myZombie);
+  
+  if (p.toucheZombie) {
+    projectiles.remove(i);
+  }
+}
 }
 
 void mousePressed() {
