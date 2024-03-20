@@ -30,10 +30,10 @@ class Projectile {
   }
   
   void verifCollisionZombie(Zombie zombie) {
-    if (!toucheZombie && xPos < zombie.xPos + zombie.img.width/2 &&
-        xPos + img.width > zombie.xPos &&
-        yPos < zombie.yPos + zombie.img.height/2 &&
-        yPos + img.height > zombie.yPos) {
+    if (!toucheZombie && xPos + img.width/2 > zombie.xPos - zombie.img.width/2 &&
+        xPos - img.width/2 < zombie.xPos + zombie.img.width/2 &&
+        yPos + img.height/2 > zombie.yPos - zombie.img.height/2 &&
+        yPos - img.height/2 < zombie.yPos + zombie.img.height/2) {
       toucheZombie = true;
     println("Collision projectile-zombie");
     }
