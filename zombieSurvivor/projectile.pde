@@ -14,4 +14,17 @@ class Projectile {
     this.angle = projectileAngle;
     this.img = projectileImage;
   }
+  
+  void update() {
+  xPos += xSpeed;
+  yPos += ySpeed;
+  }
+
+  void affichage() {
+  pushMatrix();
+  translate(xPos, yPos);
+  rotate(angle);
+  image(img, 11, 11);
+  popMatrix();
+  }
 }

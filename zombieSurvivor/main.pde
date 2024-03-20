@@ -4,21 +4,25 @@ PImage joueurImg;
 Joueur myJoueur;
 
 PImage zombieImg;
-Zombie[] myZombies; // Définir un tableau de zombies
+Zombie myZombie; 
+
+PImage projectileImg;
+
+ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
 void setup() {
   hint(ENABLE_KEY_REPEAT);
   mapImg = loadImage("mapZombie.png");
   size(1366, 768, P2D);
-
+  
+  projectileImg = loadImage("projectile.png");
   joueurImg = loadImage("spriteJoueur.png");
-  myJoueur = new Joueur(20, height/2-joueurImg.height/2, 50, 50, 100, joueurImg, 0);
+  myJoueur = new Joueur(20, height/2-joueurImg.height/2, 10, 10, 100, joueurImg, 0, projectiles, projectileImg);
   
   zombieImg= loadImage("zombie.png");
-  myZombies = new Zombie[10]; // Initialiser le tableau avec le nombre de zombies souhaité
-  for(int i = 0; i < myZombies.length; i++) {
-    myZombies[i] = new Zombie(width - zombieImg.width, (float)(height/2 - zombieImg.height/2), 3, 0, 100, zombieImg);
-  }
+  myZombie = new Zombie(width - zombieImg.width, (float)(height/2 - zombieImg.height/2), 3, 0, 100, zombieImg);
+
+
 }
 
 void draw() {
@@ -28,16 +32,38 @@ void draw() {
   translate(myJoueur.xPos, myJoueur.yPos);
   rotate(myJoueur.angle);
   // imageMode(CENTER); bug image ne pas utiliser
-  image(myJoueur.img, -33.5, -25);
+  image(myJoueur.img, -myJoueur.img.width/2, -myJoueur.img.height/2);
   popMatrix();
   
- for(int i=0; i<myZombies.length;i++){
-    myZombies[i].xPos += cos(radians(myZombies[i].Angle))*myZombies[i].xSpeed;
-    myZombies[i].yPos += sin(radians(myZombies[i].Angle))*myZombies[i].xSpeed;
-    image(zombieImg, myZombies[i].xPos, myZombies[i].yPos); // Dessiner chaque zombie
-  }   
+   image(zombieImg, myZombie.xPos, myZombie.yPos);
+   
+   if (myJoueur.xPos < myZombie.xPos + zombieImg.width/2 &&
+    myJoueur.xPos + joueurImg.width/2 > myZombie.xPos &&
+    myJoueur.yPos < myZombie.yPos + zombieImg.height/2 &&
+    myJoueur.yPos + joueurImg.height/2 > myZombie.yPos) {
+    println("Collision");
+    }
+    
+    for (int i = 0; i < projectiles.size(); i++) {
+    Projectile p = projectiles.get(i);
+    p.update();
+    p.affichage();
+    
+    if (p.xPos < myZombie.xPos + zombieImg.width/2 &&
+      p.xPos + p.img.width > myZombie.xPos &&
+      p.yPos < myZombie.yPos + zombieImg.height/2 &&
+      p.yPos + p.img.height > myZombie.yPos) {
+    println("Collision projectile-zombie");
+    }
+  }
 }
-  
+
+void mousePressed() {
+  if (mouseButton == LEFT) {
+    myJoueur.tirer();
+  }
+}
+
 void keyPressed() {
   if (key == CODED) {
     if (keyCode == RIGHT) {

@@ -6,10 +6,10 @@ class Joueur {
   int vie;
   PImage img;
   float angle;
-  //Atouts[] atouts;
-  //Arme arme;
+  ArrayList<Projectile> projectiles;
+  PImage projectileImg;
   
-  Joueur(float xJoueurPos, float yJoueurPos, float xJoueurSpeed, float yJoueurSpeed, int vieJoueur, PImage joueurImage, float angle) {
+  Joueur(float xJoueurPos, float yJoueurPos, float xJoueurSpeed, float yJoueurSpeed, int vieJoueur, PImage joueurImage, float angle, ArrayList<Projectile> projectiles, PImage projectileImg) {
     this.xPos = xJoueurPos;
     this.yPos = yJoueurPos;
     this.xSpeed = xJoueurSpeed;
@@ -17,5 +17,17 @@ class Joueur {
     this.vie = vieJoueur;
     this.img = joueurImage;
     this.angle = 0;
+    this.projectiles = projectiles;
+    this.projectileImg = projectileImg;
+  }
+  
+  void tirer() {
+    float projectileSpeed = 5;
+    float xSpeed = projectileSpeed * cos(angle);
+    float ySpeed = projectileSpeed * sin(angle);
+    
+    Projectile newProjectile = new Projectile(xPos, yPos, xSpeed, ySpeed, angle, projectileImg);
+    
+    projectiles.add(newProjectile);
   }
 }
