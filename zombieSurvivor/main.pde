@@ -1,5 +1,4 @@
 PImage mapImg;
-
 PImage joueurImg;
 Joueur myJoueur;
 
@@ -7,7 +6,7 @@ PImage zombieImg;
 Zombie myZombie; 
 
 PImage projectileImg;
-
+ArrayList<Zombie> zombies = new ArrayList<Zombie>();
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
 void setup() {
@@ -20,13 +19,22 @@ void setup() {
   myJoueur = new Joueur(20, height/2-joueurImg.height/2, 10, 10, 100, joueurImg, 0, projectiles, projectileImg);
   
   zombieImg= loadImage("zombie.png");
-  myZombie = new Zombie(width/2, (float)(height/2 - zombieImg.height/2), 3, 0, 100, zombieImg);
-
-
+      for(int i = 0; i < 5; i++) { 
+    myZombie = new Zombie(random(width), random(height), 3, 0, 100, zombieImg); 
+    zombies.add(myZombie); 
+  }
 }
 
 void draw() {
   image(mapImg, 0, 0);
+  
+  for (Zombie zombie : zombies) {   
+    zombie.deplacer(myJoueur.xPos, myJoueur.yPos);
+    zombie.afficher(); 
+    if (dist(myJoueur.xPos, myJoueur.yPos, zombie.xPos, zombie.yPos) < joueurImg.width / 2 + zombieImg.width / 2) {
+      println("Collision avec un zombie");
+    }
+  }
   myJoueur.angle = atan2(mouseY - myJoueur.yPos, mouseX - myJoueur.xPos);
   pushMatrix();
   translate(myJoueur.xPos, myJoueur.yPos);
@@ -35,7 +43,6 @@ void draw() {
   image(myJoueur.img, -myJoueur.img.width/2, -myJoueur.img.height/2);
   popMatrix();
   
-   image(zombieImg, myZombie.xPos, myZombie.yPos);
    
    if (myJoueur.xPos < myZombie.xPos + zombieImg.width/2 &&
     myJoueur.xPos + joueurImg.width/2 > myZombie.xPos &&
