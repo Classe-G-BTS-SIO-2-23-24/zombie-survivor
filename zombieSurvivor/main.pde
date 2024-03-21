@@ -66,6 +66,7 @@ void draw() {
   
   if (p.toucheZombie) {
     projectiles.remove(i);
+    p.hitZombie(myZombie);
   }
 }
 }
