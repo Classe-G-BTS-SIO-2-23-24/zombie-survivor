@@ -31,15 +31,12 @@ class Projectile {
   
   void hitZombie(Zombie zombie) { zombie.vie=zombie.vie-25; println(zombie.vie);};//25 dégâts
   void verifCollisionZombie(Zombie zombie) {
-    if (xPos >= zombie.xPos + zombie.img.width ||
-        xPos + img.width <= zombie.xPos ||
-        yPos >= zombie.yPos + zombie.img.height ||
-        yPos + img.height <= zombie.yPos) {
-      toucheZombie = false;
+    if (xPos < zombie.xPos + zombie.img.width &&
+        xPos + img.width > zombie.xPos &&
+        yPos < zombie.yPos + zombie.img.height &&
+        yPos + img.height > zombie.yPos) {
+      toucheZombie = true;
     println("Collision projectile-zombie");
-    }
-    else {
-      toucheZombie= true;
     }
   }
 }
