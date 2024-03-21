@@ -20,7 +20,7 @@ void setup() {
   
   zombieImg= loadImage("zombie.png");
       for(int i = 0; i < 5; i++) { 
-    myZombie = new Zombie(random(width), random(height), 3, 0, 100, zombieImg); 
+    myZombie = new Zombie(random(width), random(height), 1, 0, 100, zombieImg); 
     zombies.add(myZombie); 
   }
 }
