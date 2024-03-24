@@ -5,12 +5,16 @@ Joueur myJoueur;
 PImage zombieImg;
 Zombie myZombie; 
 PImage VieImg; 
-int collisionTime=0; 
+
 int collisioncolldown=1000;
 PImage projectileImg;
 ArrayList<Zombie> zombies = new ArrayList<Zombie>();
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-
+int collisionTime=0; 
+int  collisionCooldown=1000; 
+//float vieOffsetX = 0;
+//float vieOffsetY = -50;
+  
 void setup() {
   hint(ENABLE_KEY_REPEAT);
   mapImg = loadImage("mapZombie.png");
@@ -25,7 +29,8 @@ void setup() {
     myZombie = new Zombie(random(width), random(height), 1, 0, 100, zombieImg); 
     zombies.add(myZombie); 
   }
-  VieImg = loadImage("vie.png"); 
+  VieImg = loadImage("vie.png");
+  
 }
 
 void draw() {
@@ -34,12 +39,25 @@ void draw() {
   for (Zombie zombie : zombies) {   
     zombie.deplacer(myJoueur.xPos, myJoueur.yPos);
     zombie.afficher(); 
-     image(VieImg, zombie.xPos - VieImg.width/2, zombie.yPos - zombieImg.height - VieImg.height);
+    
+     //image(VieImg, zombie.xPos - VieImg.width/2, zombie.yPos - zombieImg.height - VieImg.height);
      
-    if (dist(myJoueur.xPos, myJoueur.yPos, zombie.xPos, zombie.yPos) < joueurImg.width / 2 + zombieImg.width / 2) {
-      println("Collision avec un zombie");
+    
+     
+       if (millis() - collisionTime > collisionCooldown) {
+        println("Collision avec un zombie");
+        collisionTime = millis(); 
+       }
+      
     }
-  }
+  
+    myZombie.Angle = atan2(myJoueur.yPos - myZombie.yPos, myJoueur.xPos - myZombie.xPos);
+  pushMatrix();
+  translate(myZombie.xPos, myZombie.yPos);
+  rotate(myZombie.Angle);
+  image(myZombie.img, -myZombie.img.width/2, -myZombie.img.height/2);
+  popMatrix();
+  
   
   myJoueur.angle = atan2(mouseY - myJoueur.yPos, mouseX - myJoueur.xPos);
   pushMatrix();
