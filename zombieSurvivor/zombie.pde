@@ -3,7 +3,7 @@ class Zombie{
     float yPos; 
     float xSpeed;
     float Angle=0 ; 
-    int vie ; 
+    int vie =100 ; 
     PImage img;
     
 
@@ -33,4 +33,10 @@ class Zombie{
           image(img, 11, 11);
           popMatrix();
   }
+    void recevoirdegats(int degats){
+      if(vie<0){
+        vie -=degats; 
       }
+      
+      }
+      
