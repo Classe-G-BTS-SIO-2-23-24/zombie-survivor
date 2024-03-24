@@ -34,9 +34,10 @@ class Zombie{
           popMatrix();
   }
     void recevoirdegats(int degats){
+       vie -=degats;
       if(vie<0){
-        vie -=degats; 
+         println("Zombie eliminé") ; 
       }
       
       }
-      
+}
