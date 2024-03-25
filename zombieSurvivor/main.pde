@@ -41,16 +41,29 @@ void draw() {
     zombie.deplacer(myJoueur.xPos, myJoueur.yPos);
     zombie.afficher(); 
     zombie.verifierMort();
-     //image(VieImg, zombie.xPos - VieImg.width/2, zombie.yPos - zombieImg.height - VieImg.height);
-     
+    // image(VieImg, zombie.xPos - VieImg.width/2, zombie.yPos - zombieImg.height - VieImg.height);
     
-     
-       if (millis() - collisionTime > collisionCooldown) {
+    if (myJoueur.xPos < zombie.xPos + zombieImg.width/2 &&
+        myJoueur.xPos + joueurImg.width/2 > zombie.xPos &&
+        myJoueur.yPos < zombie.yPos + zombieImg.height/2 &&
+        myJoueur.yPos + joueurImg.height/2 > zombie.yPos) {
+        println("Collision");
+    }
+
+    for (Projectile p : projectiles) {
+        if (p.xPos < zombie.xPos + zombieImg.width/2 &&
+            p.xPos + p.img.width > zombie.xPos &&
+            p.yPos < zombie.yPos + zombieImg.height/2 &&
+            p.yPos + p.img.height > zombie.yPos) {
+            println("Collision projectile-zombie");
+        }
+    }
+
+    if (millis() - collisionTime > collisionCooldown) {
         println("Collision avec un zombie");
         collisionTime = millis(); 
-       }
-      
     }
+}
   
     myZombie.Angle = atan2(myJoueur.yPos - myZombie.yPos, myJoueur.xPos - myZombie.xPos);
   pushMatrix();
@@ -69,43 +82,25 @@ void draw() {
   popMatrix();
   
    
-   if (myJoueur.xPos < myZombie.xPos + zombieImg.width/2 &&
-    myJoueur.xPos + joueurImg.width/2 > myZombie.xPos &&
-    myJoueur.yPos < myZombie.yPos + zombieImg.height/2 &&
-    myJoueur.yPos + joueurImg.height/2 > myZombie.yPos) {
-    println("Collision");
-    }
+   
     
-    for (int i = 0; i < projectiles.size(); i++) {
+    for (int i = projectiles.size() - 1; i >= 0; i--) {
     Projectile p = projectiles.get(i);
     p.update();
     p.affichage();
     
-    if (p.xPos < myZombie.xPos + zombieImg.width/2 &&
-      p.xPos + p.img.width > myZombie.xPos &&
-      p.yPos < myZombie.yPos + zombieImg.height/2 &&
-      p.yPos + p.img.height > myZombie.yPos) {
-    println("Collision projectile-zombie");
+    p.verifCollisionZombie(myZombie);
+    
+    if (p.toucheZombie) {
+        projectiles.remove(i);
+        p.hitZombie(myZombie);
     }
-  }
-  
-  for (int i = projectiles.size() - 1; i >= 0; i--) {
-  Projectile p = projectiles.get(i);
-  p.update();
-  p.affichage();
-  
-  p.verifCollisionZombie(myZombie);
-  
-  if (p.toucheZombie) {
-    projectiles.remove(i);
-    p.hitZombie(myZombie);
-  }
+}
   
   for (Zombie zombie : zombiesASupprimer) {
     zombies.remove(zombie);
    }
   zombiesASupprimer.clear();
-}
 }
 
 void mousePressed() {
