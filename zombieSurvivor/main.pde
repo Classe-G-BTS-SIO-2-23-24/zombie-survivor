@@ -39,7 +39,7 @@ void draw() {
   for (Zombie zombie : zombies) {   
     zombie.deplacer(myJoueur.xPos, myJoueur.yPos);
     zombie.afficher(); 
-    
+    zombie.verifierMort();
      //image(VieImg, zombie.xPos - VieImg.width/2, zombie.yPos - zombieImg.height - VieImg.height);
      
     
