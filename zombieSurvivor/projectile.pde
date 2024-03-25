@@ -29,7 +29,7 @@ class Projectile {
   popMatrix();
   }
   
-  void hitZombie(Zombie zombie) { zombie.vie=zombie.vie-25; println(zombie.vie);};//25 dégâts
+  void hitZombie(Zombie zombie, int WeaponDamage) { zombie.vie=zombie.vie-WeaponDamage; println(zombie.vie);};
   void verifCollisionZombie(Zombie zombie) {
     if (xPos < zombie.xPos + zombie.img.width &&
         xPos + img.width > zombie.xPos &&

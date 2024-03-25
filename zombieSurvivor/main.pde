@@ -15,7 +15,8 @@ int collisionTime=0;
 int  collisionCooldown=1000; 
 //float vieOffsetX = 0;
 //float vieOffsetY = -50;
-  
+ArrayList<Weapon> weapons;
+int currentWeapon = 0;
 void setup() {
   hint(ENABLE_KEY_REPEAT);
   mapImg = loadImage("mapZombie.png");
@@ -32,6 +33,9 @@ void setup() {
   }
   VieImg = loadImage("vie.png");
   
+  weapons = new ArrayList<Weapon>();
+  weapons.add(new Weapon(13,15,3.5));//Glock_19
+  weapons.add(new Weapon(20,8,3));//Ruger_P345
 }
 
 void draw() {
@@ -93,7 +97,7 @@ void draw() {
     
     if (p.toucheZombie) {
         projectiles.remove(i);
-        p.hitZombie(myZombie);
+        p.hitZombie(myZombie, weapons.get(currentWeapon).damage);
     }
 }
   
@@ -106,6 +110,11 @@ void draw() {
 void mousePressed() {
   if (mouseButton == LEFT) {
     myJoueur.tirer();
+  }
+  if (mouseButton == RIGHT) {
+    if (currentWeapon>weapons.size()){
+      currentWeapon=currentWeapon+1;
+    } else { currentWeapon=currentWeapon+0; }
   }
 }
 
