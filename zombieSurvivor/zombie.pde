@@ -44,7 +44,7 @@ class Zombie{
       void verifierMort() {
         if (vie <= 0) {
         println("Zombie éliminé");
-        zombies.remove(this);
+        zombiesASupprimer.add(this);
       }
 }
 

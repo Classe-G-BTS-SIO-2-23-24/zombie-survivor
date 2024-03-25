@@ -10,6 +10,7 @@ int collisioncolldown=1000;
 PImage projectileImg;
 ArrayList<Zombie> zombies = new ArrayList<Zombie>();
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+ArrayList<Zombie> zombiesASupprimer = new ArrayList<Zombie>();
 int collisionTime=0; 
 int  collisionCooldown=1000; 
 //float vieOffsetX = 0;
@@ -99,6 +100,11 @@ void draw() {
     projectiles.remove(i);
     p.hitZombie(myZombie);
   }
+  
+  for (Zombie zombie : zombiesASupprimer) {
+    zombies.remove(zombie);
+   }
+  zombiesASupprimer.clear();
 }
 }
 
