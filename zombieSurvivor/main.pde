@@ -105,11 +105,11 @@ void draw() {
 
     fill(255);
     textSize(20);
-    text("Score : " + myJoueur.score, 20, height - 40);
+    text("Score : " + myJoueur.score, 55, height - 40);
 
     fill(255);
     textSize(20);
-    text(weapons.get(currentWeapon).name+" "+weapons.get(currentWeapon).ammo+"/"+weapons.get(currentWeapon).ammo2, 20, height -80);
+    text(weapons.get(currentWeapon).name+" "+weapons.get(currentWeapon).ammo+"/"+weapons.get(currentWeapon).ammo2, 70, height -80);
   }
 }
 
