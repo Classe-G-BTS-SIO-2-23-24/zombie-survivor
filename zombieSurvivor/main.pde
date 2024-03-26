@@ -34,8 +34,9 @@ void setup() {
   VieImg = loadImage("vie.png");
 
   weapons = new ArrayList<Weapon>();
-  weapons.add(new Weapon(13, 15, 3.5));//Glock_19
-  weapons.add(new Weapon(20, 8, 3));//Ruger_P345
+  weapons.add(new Weapon(999,999,999,1));//debug
+  weapons.add(new Weapon(13,15,15,3.5));//Glock_19
+  weapons.add(new Weapon(20,8,8,3));//Ruger_P345
 }
 
 void draw() {
@@ -54,7 +55,7 @@ void draw() {
       p.verifCollisionZombie(zombie);
       if (p.toucheZombie) {
         projectilesASupprimer.add(p);
-        p.hitZombie(zombie);
+        p.hitZombie(zombie, weapons.get(currentWeapon).damage);
         break; //sortie de boucle
       }
     }
@@ -114,7 +115,6 @@ void draw() {
 
     if (p.toucheZombie) {
       projectiles.remove(i);
-      p.hitZombie(myZombie, weapons.get(currentWeapon).damage);
     }
   }
 
@@ -130,25 +130,24 @@ void draw() {
 
 void mousePressed() {
   if (mouseButton == LEFT) {
-    myJoueur.tirer(15);
+    if(weapons.get(currentWeapon).ammo==0) { println("No ammo.");}
+    else{weapons.get(currentWeapon).ammo=weapons.get(currentWeapon).ammo-1; myJoueur.tirer(15);}
   }
   if (mouseButton == RIGHT) {
-    if (currentWeapon>weapons.size()) {
-      currentWeapon=currentWeapon+1;
+    println(currentWeapon);
+    println(weapons.size());
+    if (currentWeapon==weapons.size()-1) {
+      currentWeapon=0;
     } else {
-      currentWeapon=currentWeapon+0;
-    }
-  }
-  if (mouseButton == RIGHT) {
-    if (currentWeapon>weapons.size()) {
-      currentWeapon=currentWeapon+1;
-    } else {
-      currentWeapon=currentWeapon+0;
+      currentWeapon+=1;
     }
   }
 }
 
 void keyPressed() {
+  if (key == 'r') {
+    weapons.get(currentWeapon).ammo=weapons.get(currentWeapon).ammo2;
+  }
   if (key == CODED) {
     if (keyCode == RIGHT) {
       myJoueur.xPos += myJoueur.xSpeed;

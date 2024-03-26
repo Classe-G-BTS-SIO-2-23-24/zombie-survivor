@@ -30,12 +30,6 @@ class Zombie {
     image(img, 11, 11);
     popMatrix();
   }
-  void recevoirdegats(int degats) {
-    vie -=degats;
-    if (vie<0) {
-      println("Zombie eliminé") ;
-    }
-  }
 
   void verifierMort() {
     if (vie <= 0) {
