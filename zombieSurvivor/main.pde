@@ -35,9 +35,9 @@ void setup() {
   VieImg = loadImage("vie.png");
 
   weapons = new ArrayList<Weapon>();
-  weapons.add(new Weapon(999, 999, 999, 1)); // debug
-  weapons.add(new Weapon(13, 15, 15, 3.5)); // Glock_19
-  weapons.add(new Weapon(20, 8, 8, 3)); // Ruger_P345
+  weapons.add(new Weapon("debug", 999, 999, 999, 1));
+  weapons.add(new Weapon("Glock 19", 13, 15, 15, 3.5));
+  weapons.add(new Weapon("Ruger P345", 20, 8, 8, 3));
 }
 
 void draw() {
@@ -106,6 +106,10 @@ void draw() {
     fill(255);
     textSize(20);
     text("Score : " + myJoueur.score, 20, height - 40);
+
+    fill(255);
+    textSize(20);
+    text(weapons.get(currentWeapon).name+" "+weapons.get(currentWeapon).ammo+"/"+weapons.get(currentWeapon).ammo2, 20, height -80);
   }
 }
 
