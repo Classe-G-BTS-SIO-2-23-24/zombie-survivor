@@ -41,6 +41,7 @@ class Zombie {
     if (vie <= 0) {
       println("Zombie éliminé");
       zombiesASupprimer.add(this);
+      myJoueur.score += 100;
     }
   }
 }

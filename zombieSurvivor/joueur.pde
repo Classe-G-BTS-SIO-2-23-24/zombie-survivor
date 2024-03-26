@@ -8,6 +8,7 @@ class Joueur {
   float angle;
   ArrayList<Projectile> projectiles;
   PImage projectileImg;
+  int score;
 
   Joueur(float xJoueurPos, float yJoueurPos, float xJoueurSpeed, float yJoueurSpeed, int vieJoueur, PImage joueurImage, float angle, ArrayList<Projectile> projectiles, PImage projectileImg) {
     this.xPos = xJoueurPos;
@@ -19,6 +20,7 @@ class Joueur {
     this.angle = 0;
     this.projectiles = projectiles;
     this.projectileImg = projectileImg;
+    this.score = 500;
   }
 
   void tirer(float projectileSpeed) {

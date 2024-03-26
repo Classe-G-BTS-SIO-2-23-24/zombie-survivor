@@ -27,7 +27,7 @@ void setup() {
   myJoueur = new Joueur(20, height/2-joueurImg.height/2, 10, 10, 100, joueurImg, 0, projectiles, projectileImg);
 
   zombieImg= loadImage("zombie.png");
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < random(10)+1; i++) {
     myZombie = new Zombie(random(width), random(height), 1, 0, 100, zombieImg);
     zombies.add(myZombie);
   }
@@ -122,6 +122,10 @@ void draw() {
     zombies.remove(zombie);
   }
   zombiesASupprimer.clear();
+  
+  fill(255);
+  textSize(20);
+  text("Score : " + myJoueur.score, 20, height -40);
 }
 
 void mousePressed() {
