@@ -24,10 +24,11 @@ class Zombie {
   }
 
   void afficher() {
+    
     pushMatrix();
     translate(xPos, yPos);
     rotate(Angle);
-    image(img, 11, 11);
+    image(img, -img.width/2, -img.height/2);
     popMatrix();
   }
 

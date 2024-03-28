@@ -69,7 +69,14 @@ void draw() {
 
     for (Zombie zombie : zombies) {
       zombie.deplacer(myJoueur.xPos, myJoueur.yPos);
+      zombie.Angle = atan2(myJoueur.yPos - zombie.yPos, myJoueur.xPos - zombie.xPos);
       zombie.afficher();
+      //zombie.Angle = atan2(myJoueur.yPos - zombie.yPos, myJoueur.xPos - zombie.xPos);
+    //pushMatrix();
+    //translate(zombie.xPos, zombie.yPos);
+    //rotate(zombie.Angle);
+    //image(zombie.img, - zombie.img.width/2, -zombie.img.height/2);
+    //popMatrix();
       zombie.verifierMort();
         
 
@@ -81,12 +88,7 @@ void draw() {
                 println("Collision");
                 collisionTime=millis();
           }
-     zombie.Angle = atan2(myJoueur.yPos - zombie.yPos, myJoueur.xPos - zombie.xPos);
-    pushMatrix();
-    //translate(zombie.xPos, zombie.yPos);
-    rotate(zombie.Angle);
-    image(zombie.img, - zombie.img.width/2, -zombie.img.height/2);
-    popMatrix();
+     
       }
     
 
