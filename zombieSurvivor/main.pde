@@ -32,6 +32,7 @@ void setup() {
     myZombie = new Zombie(random(width), random(height), 1, 0, 100, zombieImg);
     zombies.add(myZombie);
   }
+  //zombies.add(new Zombie(random(width), random(height), 1, 0, 100, zombieImg));
   VieImg = loadImage("vie.png");
 
   weapons = new ArrayList<Weapon>();
@@ -80,15 +81,16 @@ void draw() {
                 println("Collision");
                 collisionTime=millis();
           }
+     zombie.Angle = atan2(myJoueur.yPos - zombie.yPos, myJoueur.xPos - zombie.xPos);
+    pushMatrix();
+    //translate(zombie.xPos, zombie.yPos);
+    rotate(zombie.Angle);
+    image(zombie.img, - zombie.img.width/2, -zombie.img.height/2);
+    popMatrix();
       }
     
 
-    myZombie.Angle = atan2(myJoueur.yPos - myZombie.yPos, myJoueur.xPos - myZombie.xPos);
-    pushMatrix();
-    translate(myZombie.xPos, myZombie.yPos);
-    rotate(myZombie.Angle);
-    image(myZombie.img, -myZombie.img.width/2, -myZombie.img.height/2);
-    popMatrix();
+    
 
     myJoueur.angle = atan2(mouseY - myJoueur.yPos, mouseX - myJoueur.xPos);
     pushMatrix();
