@@ -70,14 +70,18 @@ void draw() {
       zombie.deplacer(myJoueur.xPos, myJoueur.yPos);
       zombie.afficher();
       zombie.verifierMort();
+        
 
       if (myJoueur.xPos < zombie.xPos + zombieImg.width/2 &&
         myJoueur.xPos + joueurImg.width/2 > zombie.xPos &&
         myJoueur.yPos < zombie.yPos + zombieImg.height/2 &&
         myJoueur.yPos + joueurImg.height/2 > zombie.yPos) {
-        println("Collision");
+          if (millis()-collisionTime>collisioncolldown)
+                println("Collision");
+                collisionTime=millis();
+          }
       }
-    }
+    
 
     myZombie.Angle = atan2(myJoueur.yPos - myZombie.yPos, myJoueur.xPos - myZombie.xPos);
     pushMatrix();
