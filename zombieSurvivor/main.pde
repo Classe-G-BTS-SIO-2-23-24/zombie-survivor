@@ -17,6 +17,8 @@ ArrayList<Weapon> weapons;
 int currentWeapon = 0;
 
 boolean ecranDeLancement = true;
+int clickTime = 0;
+boolean reload = false;
 
 void setup() {
   hint(ENABLE_KEY_REPEAT);
@@ -36,7 +38,7 @@ void setup() {
   VieImg = loadImage("vie.png");
 
   weapons = new ArrayList<Weapon>();
-  weapons.add(new Weapon("debug", 999, 999, 999, 1));
+  weapons.add(new Weapon("debug", 999, 999, 999, 2));
   weapons.add(new Weapon("Glock 19", 13, 15, 15, 3.5));
   weapons.add(new Weapon("Ruger P345", 20, 8, 8, 3));
 }
@@ -88,11 +90,7 @@ void draw() {
                 println("Collision");
                 collisionTime=millis();
           }
-     
       }
-    
-
-    
 
     myJoueur.angle = atan2(mouseY - myJoueur.yPos, mouseX - myJoueur.xPos);
     pushMatrix();
@@ -118,6 +116,13 @@ void draw() {
     fill(255);
     textSize(20);
     text(weapons.get(currentWeapon).name+" "+weapons.get(currentWeapon).ammo+"/"+weapons.get(currentWeapon).ammo2, 70, height -80);
+    
+    if(reload){
+      if(clickTime + weapons.get(currentWeapon).reloadTime*1000 < millis()){
+        reload = false;
+        weapons.get(currentWeapon).ammo = weapons.get(currentWeapon).ammo2;
+      }
+    }
   }
 }
 
@@ -166,7 +171,8 @@ void mousePressed() {
 
 void keyPressed() {
   if (key == 'r') {
-    weapons.get(currentWeapon).ammo = weapons.get(currentWeapon).ammo2;
+    clickTime = millis();
+    reload = true;
   }
   if (key == CODED) {
     if (keyCode == RIGHT) {
