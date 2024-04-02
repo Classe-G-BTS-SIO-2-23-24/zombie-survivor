@@ -38,9 +38,9 @@ void setup() {
   VieImg = loadImage("vie.png");
 
   weapons = new ArrayList<Weapon>();
-  weapons.add(new Weapon("debug", 999, 999, 999, 2));
   weapons.add(new Weapon("Glock 19", 13, 15, 15, 3.5));
   weapons.add(new Weapon("Ruger P345", 20, 8, 8, 3));
+  weapons.add(new Weapon("Lee–Enfield", 70, 5, 5, 1));
 }
 
 void draw() {
@@ -119,8 +119,12 @@ void draw() {
     
     if(reload){
       if(clickTime + weapons.get(currentWeapon).reloadTime*1000 < millis()){
+        if(weapons.get(currentWeapon).name.equals("Lee–Enfield") && weapons.get(currentWeapon).ammo!=weapons.get(currentWeapon).ammo2){
+          reload = false;
+          weapons.get(currentWeapon).ammo+= 1;
+        } else {
         reload = false;
-        weapons.get(currentWeapon).ammo = weapons.get(currentWeapon).ammo2;
+        weapons.get(currentWeapon).ammo = weapons.get(currentWeapon).ammo2; }
       }
     }
   }
