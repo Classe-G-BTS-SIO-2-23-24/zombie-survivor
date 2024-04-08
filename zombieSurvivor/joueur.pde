@@ -20,7 +20,7 @@ class Joueur {
     this.angle = 0;
     this.projectiles = projectiles;
     this.projectileImg = projectileImg;
-    this.score = 0;
+    this.score = 500;
   }
 
   void tirer(float projectileSpeed) {

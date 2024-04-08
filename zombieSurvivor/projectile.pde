@@ -40,6 +40,7 @@ class Projectile {
       yPos + img.height > zombie.yPos) {
       toucheZombie = true;
       println("Collision projectile-zombie");
+      myJoueur.score += 10;
     }
   }
 }
